@@ -2,6 +2,7 @@ import { Observable, Subscriber } from 'rxjs';
 import { RequestType } from './RequestType';
 import { RxjsRemoteResponse } from './RxjsRemoteResponse';
 import { RxjsAttachConfig } from './RxjsAttachConfig';
+import { generateUuidV4 } from './generateUuidV4';
 
 export class RxjsRemoteClient {
 	private readonly _subscribers = new Map<string, Subscriber<any>>();
@@ -16,7 +17,7 @@ export class RxjsRemoteClient {
 	}
 
 	private subscribe<T>(subscriber: Subscriber<T>, name: string, ...args: any[]) {
-		const id = Math.random().toString(36).substring(2, 15);
+		const id = generateUuidV4();
 		this._subscribers.set(id, subscriber);
 		this._config.send({ type: RequestType.start, id, name, args });
 		return () => this._config.send({ type: RequestType.complete, id });
@@ -24,7 +25,7 @@ export class RxjsRemoteClient {
 
 	private onMessage(message: RxjsRemoteResponse) {
 		if (!this._subscribers.has(message.id)) {
-			throw new Error('id not found');
+			return;
 		}
 		const subscriber = this._subscribers.get(message.id);
 		switch (message.type) {
@@ -39,7 +40,7 @@ export class RxjsRemoteClient {
 				break;
 		}
 	}
-	
+
 	private onClose(): void {
 		for (const [_, subscriber] of this._subscribers) {
 			subscriber.error(new Error('connection closed'));
