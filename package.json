@@ -5,7 +5,7 @@
 	"main": "./dist",
 	"scripts": {
 		"update:git": "git add ./* & git commit -m \"auto-commit\" & git push",
-		"update": "npm run update:client & npm run update:git & npm version patch & npm run update:git",
+		"update": "npm run update:git & npm version patch & npm run update:git",
 		"postversion": "npm run build && npm publish",
 		"build": "rimraf ./dist && npm run generate-barrels && tsc",
 		"generate-barrels": "barrelsby --delete -d ./src"
