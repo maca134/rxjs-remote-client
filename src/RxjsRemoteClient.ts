@@ -41,7 +41,7 @@ export class RxjsRemoteClient {
 		}
 	}
 
-	private onClose(): void {
+	private onClose() {
 		for (const [_, subscriber] of this._subscribers) {
 			subscriber.error(new Error('connection closed'));
 		}

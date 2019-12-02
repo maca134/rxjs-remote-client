@@ -4,13 +4,18 @@
 	"description": "Observerables over the network client",
 	"main": "./dist",
 	"scripts": {
-		"update": "git add ./* & git commit -m update & git push & npm version patch",
+		"update:git": "git add ./* & git commit -m \"auto-commit\" & git push",
+		"update": "npm run update:client & npm run update:git & npm version patch & npm run update:git",
 		"postversion": "npm run build && npm publish",
 		"build": "rimraf ./dist && npm run generate-barrels && tsc",
 		"generate-barrels": "barrelsby --delete -d ./src"
 	},
 	"author": "maca134",
-	"license": "UNLICENSED",
+	"license": "MIT",
+	"repository": {
+		"url": "https://github.com/maca134/rxjs-remote-client.git"
+	},
+	"homepage": "https://github.com/maca134/rxjs-remote-client",
 	"dependencies": {
 		"rxjs": "^6.5.3"
 	},
