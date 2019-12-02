@@ -1,0 +1,23 @@
+{
+	"name": "@maca134/rxjs-remote-client",
+	"version": "1.0.2",
+	"description": "Observerables over the network client",
+	"main": "./dist",
+	"scripts": {
+		"dev:debug": "nodemon --inspect ./src/index.ts",
+		"postversion": "npm run build && npm publish",
+		"build": "rimraf ./dist && npm run generate-barrels && tsc",
+		"generate-barrels": "barrelsby --delete -d ./src"
+	},
+	"author": "maca134",
+	"license": "UNLICENSED",
+	"dependencies": {
+		"rxjs": "^6.5.3"
+	},
+	"devDependencies": {
+		"barrelsby": "^2.2.0",
+		"rimraf": "^3.0.0",
+		"ts-node": "^8.5.2",
+		"typescript": "^3.7.2"
+	}
+}
