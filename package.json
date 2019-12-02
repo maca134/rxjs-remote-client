@@ -4,7 +4,7 @@
 	"description": "Observerables over the network client",
 	"main": "./dist",
 	"scripts": {
-		"dev:debug": "nodemon --inspect ./src/index.ts",
+		"update": "git add ./* & git commit -m update & git push & npm version patch",
 		"postversion": "npm run build && npm publish",
 		"build": "rimraf ./dist && npm run generate-barrels && tsc",
 		"generate-barrels": "barrelsby --delete -d ./src"
