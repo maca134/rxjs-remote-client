@@ -10,7 +10,7 @@
 		"build": "rimraf ./dist && npm run generate-barrels && tsc",
 		"generate-barrels": "barrelsby --delete -d ./src"
 	},
-	"author": "maca134",
+	"author": "maca134@googlemail.com",
 	"license": "MIT",
 	"repository": {
 		"url": "https://github.com/maca134/rxjs-remote-client.git"
